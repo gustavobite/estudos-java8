@@ -35,6 +35,23 @@ public class ExemplosIniciais {
  * Comparator.comparing(Disciplina::getQtdAlunos)
  * -------------------------------------------------------------------
  * 
+ * 1) Operações Stream intermediárias
+
+filter : Resulta em um fluxo contendo apenas os elementos que atendem uma condição.
+distinct : Resulta em um fluxo que contém somente os elementos únicos.
+limit : Resulta em um fluxo com o número especificado de elementos a partir do início do fluxo original.
+map : Resulta em um fluxo em que cada elemento do fluxo original é mapeado para um novo valor.
+sorted : Resulta em um fluxo em que os elementos estão em ordem classificada. O novo fluxo tem o mesmo número de elementos que o fluxo original.
+
+2) Operações Stream terminais
+
+forEach : Realiza o processamento em cada elemento em um fluxo (por exemplo, exibir cada elemento).
+
+2.1) Operações de redução - recebem todos os valores no fluxo e retornam um único valor
+
+average : Calcula a média dos elementos em um fluxo numérico.
+count : Retorna o número de elemen
+ * 
  */
 	public static void main(String[] args) {
 		List<Disciplina> disciplinas = new ArrayList<Disciplina>();
@@ -45,12 +62,27 @@ public class ExemplosIniciais {
 		disciplinas.add(new Disciplina("Portugês", 40));
 		disciplinas.add(new Disciplina("Matemática", 40));
 		
-		ordenaPelaQtdAlunos(disciplinas);
-		imprimeDisciplinasComQtdAlunosSuperior35(disciplinas);
-		imprimeQtdAlunosDasDisciplinasComQtdAlunosSuperior35(disciplinas);
-		imprimeSomaQtdAlunosDasDisciplinasComQtdAlunosSuperior35(disciplinas);
+		//ordenaPelaQtdAlunos(disciplinas);
+		//imprimeDisciplinasComQtdAlunosSuperior35(disciplinas);
+		//imprimeQtdAlunosDasDisciplinasComQtdAlunosSuperior35(disciplinas);
+		//imprimeSomaQtdAlunosDasDisciplinasComQtdAlunosSuperior35(disciplinas);
+		//aplicandoDistinct(disciplinas);
 		
+		disciplinas.stream()
+		.filter(d -> d.getQtdAlunos() >= 35)
+		.map(Disciplina::getQtdAlunos)
+		.limit(1).forEach(System.out::println);;
 	
+	}
+
+	// Método apenas para exemplificar uso de distinct
+	// Neste caso, imprimirá os resultados de forma unificada (sem repetição) baseando-se no map(getQtdAlunos)
+	private static void aplicandoDistinct(List<Disciplina> disciplinas) {
+		disciplinas.stream()
+			.filter(d -> d.getQtdAlunos() >= 35)
+			.map(Disciplina::getQtdAlunos)
+			.distinct()
+			.forEach(System.out::println);
 	}
 
 	//Problemática: Dado as disciplinas que possuem mais que 35 alunos, quero a soma dessa quantidade de alunos das disciplinas filtradas.
