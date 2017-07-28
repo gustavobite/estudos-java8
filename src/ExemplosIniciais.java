@@ -45,7 +45,7 @@ public class ExemplosIniciais {
 		disciplinas.add(new Disciplina("Portugês", 40));
 		disciplinas.add(new Disciplina("Matemática", 40));
 		
-		comparePelaQtdAlunos(disciplinas);
+		ordenaPelaQtdAlunos(disciplinas);
 		imprimeDisciplinasComQtdAlunosSuperior35(disciplinas);
 		imprimeQtdAlunosDasDisciplinasComQtdAlunosSuperior35(disciplinas);
 		imprimeSomaQtdAlunosDasDisciplinasComQtdAlunosSuperior35(disciplinas);
@@ -80,7 +80,7 @@ public class ExemplosIniciais {
 	}
 
 	//Imprime disciplinas ordenadas pela quantidade de alunos.
-	private static void comparePelaQtdAlunos(List<Disciplina> disciplinas) {
+	private static void ordenaPelaQtdAlunos(List<Disciplina> disciplinas) {
 		disciplinas.sort(Comparator.comparing(Disciplina::getQtdAlunos));
 		disciplinas.forEach(d -> System.out.println(d.getNome()));
 	}
