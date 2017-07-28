@@ -26,14 +26,14 @@ public class ExemplosIniciais {
 /**
  * Anotações
  * 
+ * -= Dica (1) =-
  * - Ficar atento com auto-boxing no uso dos métodos do Java 8.
- * Por exemplo, caso tenhas certeza que sempre será um inteiro do tipo primitivo a ser comparado na qtdAlunos
+ * Por exemplo, caso tenha certeza que sempre será um inteiro(primitivo) a ser comparado na qtdAlunos
  * poderia então, utilizar:
  * Comparator.comparingInt(Disciplina::getQtdAlunos)
- * invés de
+ * ao invés de
  * Comparator.comparing(Disciplina::getQtdAlunos)
  * -------------------------------------------------------------------
- * 
  * 
  */
 	public static void main(String[] args) {
@@ -45,15 +45,15 @@ public class ExemplosIniciais {
 		disciplinas.add(new Disciplina("Portugês", 40));
 		disciplinas.add(new Disciplina("Matemática", 40));
 		
-		//comparePelaQtdAlunos(disciplinas);
-		//imprimeDisciplinasComQtdAlunosSuperior35(disciplinas);
-		//imprimeQtdAlunosDasDisciplinasComQtdAlunosSuperior35(disciplinas);
-		//imprimeSomaQtdAlunosDasDisciplinasComQtdAlunosSuperior35(disciplinas);
+		comparePelaQtdAlunos(disciplinas);
+		imprimeDisciplinasComQtdAlunosSuperior35(disciplinas);
+		imprimeQtdAlunosDasDisciplinasComQtdAlunosSuperior35(disciplinas);
+		imprimeSomaQtdAlunosDasDisciplinasComQtdAlunosSuperior35(disciplinas);
 		
 	
 	}
 
-	//Dado as disciplinas que possuem mais que 35 alunos, quero a soma dessa quantidade de alunos das disciplinas filtradas
+	//Problemática: Dado as disciplinas que possuem mais que 35 alunos, quero a soma dessa quantidade de alunos das disciplinas filtradas.
 	private static void imprimeSomaQtdAlunosDasDisciplinasComQtdAlunosSuperior35(List<Disciplina> disciplinas) {
 		int sum = disciplinas.stream()
 				.filter(d -> d.getQtdAlunos() >= 35)
@@ -62,9 +62,9 @@ public class ExemplosIniciais {
 		System.out.println(sum);
 	}
 
-	//Dado as disciplinas que possuem mais que 35 alunos, quero a relação dessa quantidade de alunos de cada disciplina
-	//Utilizando method references pq é possível
-	//No filter não é possível utilizar method references, pois é manipulado um outro dado.
+	//Problemática: Dado de entrada as disciplinas que possuem mais que 35 alunos, quero a relação dessa quantidade de alunos de cada disciplina que será filtrada.
+	//Dica: No "map" e "forEach" estou utilizando method references pq existe essa possibilidade.
+	//No filter não é possível utilizar method references, pois é manipulado um outro dado em conjunto.
 	private static void imprimeQtdAlunosDasDisciplinasComQtdAlunosSuperior35(List<Disciplina> disciplinas) {
 		disciplinas.stream()
 				.filter(d -> d.getQtdAlunos() >= 35)
@@ -72,14 +72,14 @@ public class ExemplosIniciais {
 				.forEach(System.out::println);
 	}
 
-	//Imprimir todas disciplinas que tenham mais de 35 alunos
+	//Imprime todas disciplinas que possuam mais de 35 alunos.
 	private static void imprimeDisciplinasComQtdAlunosSuperior35(List<Disciplina> disciplinas) {
 		disciplinas.stream()
 				.filter(d -> d.getQtdAlunos() >= 35)
 				.forEach(d -> System.out.println(d.getNome()));
 	}
 
-	//Imprime disciplinas ordenadas pela quantidade de alunos
+	//Imprime disciplinas ordenadas pela quantidade de alunos.
 	private static void comparePelaQtdAlunos(List<Disciplina> disciplinas) {
 		disciplinas.sort(Comparator.comparing(Disciplina::getQtdAlunos));
 		disciplinas.forEach(d -> System.out.println(d.getNome()));
