@@ -1,73 +1,72 @@
 # estudos-java8
-Códigos para prática desenvolvimento Java
+CÃ³digos para prÃ¡tica desenvolvimento Java
 
------- Visão geral sobre Programação Funcional no Java------
+------ VisÃ£o geral sobre ProgramaÃ§Ã£o Funcional no Java------
 
-- Antes do Java SE 8, o Java suportava três paradigmas de programação — programação procedural, programação orientada a objetos e programação
-genérica. O Java SE 8 acrescenta a programação funcional.
-- Antes da programação funcional, você normalmente determinava o que queria alcançar e, então, especificava os passos precisos para realizar
+- Antes do Java SE 8, o Java suportava trÃªs paradigmas de programaÃ§Ã£o â€” programaÃ§Ã£o procedural, programaÃ§Ã£o orientada a objetos e programaÃ§Ã£o
+genÃ©rica. O Java SE 8 acrescenta a programaÃ§Ã£o funcional.
+- Antes da programaÃ§Ã£o funcional, vocÃª normalmente determinava o que queria alcanÃ§ar e, entÃ£o, especificava os passos precisos para realizar
 essa tarefa.
-- Usar um loop para iterar por uma coleção de elementos é conhecido como iteração externa e requer acesso sequencial aos elementos. Essa
-iteração também requer variáveis mutáveis.
-- Na programação funcional, você especifica o que quer alcançar em uma tarefa, mas não como realizar isso.
-- Deixar a biblioteca determinar como iterar por uma coleção de elementos é conhecido como iteração interna. A iteração interna é mais fácil de
+- Usar um loop para iterar por uma coleÃ§Ã£o de elementos Ã© conhecido como iteraÃ§Ã£o externa e requer acesso sequencial aos elementos. Essa
+iteraÃ§Ã£o tambÃ©m requer variÃ¡veis mutÃ¡veis.
+- Na programaÃ§Ã£o funcional, vocÃª especifica o que quer alcanÃ§ar em uma tarefa, mas nÃ£o como realizar isso.
+- Deixar a biblioteca determinar como iterar por uma coleÃ§Ã£o de elementos Ã© conhecido como iteraÃ§Ã£o interna. A iteraÃ§Ã£o interna Ã© mais fÃ¡cil de
 paralelizar.
-- A programação funcional focaliza a imutabilidade — não modifica a origem de dados que é processada ou qualquer outro estado do programa.
+- A programaÃ§Ã£o funcional focaliza a imutabilidade â€” nÃ£o modifica a origem de dados que Ã© processada ou qualquer outro estado do programa.
 
------- Anotações ------
+------ AnotaÃ§Ãµes ------
 
 -= Dica (1) =-
-- Ficar atento com auto-boxing no uso dos métodos do Java 8.
-	Por exemplo, caso tenha certeza que sempre será um inteiro(primitivo) a ser comparado na qtdAlunos poderia então, utilizar:
+- Ficar atento com auto-boxing no uso dos mÃ©todos do Java 8.
+	Por exemplo, caso tenha certeza que sempre serÃ¡ um inteiro(primitivo) a ser comparado na qtdAlunos poderia entÃ£o, utilizar:
 		Comparator.comparingInt(Disciplina::getQtdAlunos)
-	ao invés de
+	ao invÃ©s de
 		Comparator.comparing(Disciplina::getQtdAlunos)
 
 -= Dica (2) =-		
-- Você pode criar suas próprias interfaces funcionais garantindo que cada uma contenha um único método abstract e zero ou
-mais métodos default ou static. Embora não seja necessário, você pode declarar que uma interface é funcional precedendo-a
-com a anotação @FunctionalInterface. O compilador então garantirá que a interface contém um único método abstract; caso
-contrário, ele vai gerar um erro de compilação.
+- VocÃª pode criar suas prÃ³prias interfaces funcionais garantindo que cada uma contenha um Ãºnico mÃ©todo abstract e zero ou
+mais mÃ©todos default ou static. Embora nÃ£o seja necessÃ¡rio, vocÃª pode declarar que uma interface Ã© funcional precedendo-a
+com a anotaÃ§Ã£o @FunctionalInterface. O compilador entÃ£o garantirÃ¡ que a interface contÃ©m um Ãºnico mÃ©todo abstract; caso
+contrÃ¡rio, ele vai gerar um erro de compilaÃ§Ã£o.
 
 
 ------ Resumo dos estudos (Java 8) ------
 
-1) Operações intermediárias - Stream
+1) OperaÃ§Ãµes intermediÃ¡rias - Stream
 
-filter 		: Resulta em um Stream contendo apenas os elementos que atendem uma condição.
-distinct 	: Resulta em um Stream que contém somente os elementos únicos.
-limit 		: Resulta em um Stream com o número especificado de elementos a partir do início do stream original.
-map 		: Resulta em um Stream em que cada elemento do Stream original é mapeado para um novo valor.
-sorted 		: Resulta em um Stream em que os elementos estão em ordem classificada. O novo Stream tem o mesmo número de elementos que o Stream original.
+filter 		: Resulta em um Stream contendo apenas os elementos que atendem uma condiÃ§Ã£o.
+distinct 	: Resulta em um Stream que contÃ©m somente os elementos Ãºnicos.
+limit 		: Resulta em um Stream com o nÃºmero especificado de elementos a partir do inÃ­cio do stream original.
+map 		: Resulta em um Stream em que cada elemento do Stream original Ã© mapeado para um novo valor.
+sorted 		: Resulta em um Stream em que os elementos estÃ£o em ordem classificada. O novo Stream tem o mesmo nÃºmero de elementos que o Stream original.
 
-2) Operações terminais - Stream
+2) OperaÃ§Ãµes terminais - Stream
 
 forEach 	: Realiza o processamento em cada elemento em um Stream (por exemplo, exibir cada elemento).
 
-2.1) Operações de redução - recebem todos os valores de um Stream e retornam um único valor
+2.1) OperaÃ§Ãµes de reduÃ§Ã£o - recebem todos os valores de um Stream e retornam um Ãºnico valor
 
-average 	: Calcula a média dos elementos em um Stream numérico.
-count 		: Retorna o número de elementos em Stream.
-max 		: Localiza o maior valor em um Stream numérico.
-min 		: Localiza o menor valor em um Stream numérico
-reduce 		: Reduz os elementos de uma coleção a um único valor usando uma função de acumulação associativa 
+average 	: Calcula a mÃ©dia dos elementos em um Stream numÃ©rico.
+count 		: Retorna o nÃºmero de elementos em Stream.
+max 		: Localiza o maior valor em um Stream numÃ©rico.
+min 		: Localiza o menor valor em um Stream numÃ©rico
+reduce 		: Reduz os elementos de uma coleÃ§Ã£o a um Ãºnico valor usando uma funÃ§Ã£o de acumulaÃ§Ã£o associativa 
 
-2.2) Operações de redução mutáveis (como uma Collection ou um StringBuilder)
+2.2) OperaÃ§Ãµes de reduÃ§Ã£o mutÃ¡veis (como uma Collection ou um StringBuilder)
 
-collect 	: Cria uma nova coleção dos elementos contendo os resultados das operações anteriores do Stream.
-toArray 	: Cria um array contendo os resultados das operações anteriores do Stream.
+collect 	: Cria uma nova coleÃ§Ã£o dos elementos contendo os resultados das operaÃ§Ãµes anteriores do Stream.
+toArray 	: Cria um array contendo os resultados das operaÃ§Ãµes anteriores do Stream.
 
-3) Operações de pesquisa
+3) OperaÃ§Ãµes de pesquisa
 
-findFirst	: Localiza o primeiro elemento no Stream com base nas operações intermediárias realizadas.
-findAny 	: Localiza qualquer elemento no Stream com base nas operações intermediárias realizadas.
-anyMatch	: Determina se quaisquer elementos no fluxo correspondem a uma condição especificada.
-allMatch	: Determina se todos os elementos no fluxo correspondem a uma condição especificada.
+findFirst	: Localiza o primeiro elemento no Stream com base nas operaÃ§Ãµes intermediÃ¡rias realizadas.
+findAny 	: Localiza qualquer elemento no Stream com base nas operaÃ§Ãµes intermediÃ¡rias realizadas.
+anyMatch	: Determina se quaisquer elementos no fluxo correspondem a uma condiÃ§Ã£o especificada.
+allMatch	: Determina se todos os elementos no fluxo correspondem a uma condiÃ§Ã£o especificada.
 
-Para uma aprimoração no conteúdo, recomendo fazer o curso da ALURA e fazer uma leitura complementar no livro dos Deitel.
-
-Referência bibliográfica:
+Para uma aprimoraÃ§Ã£o no conteÃºdo, recomendo fazer o curso da ALURA e fazer uma leitura complementar no livro dos Deitel.
+ReferÃªncia bibliogrÃ¡fica:
 - Curso ALURA: https://cursos.alura.com.br/course/java8-lambdas
-- Java: como programar / Paul Deitel, Harvey Deitel; tradução Edson
-Furmankiewicz; revisão técnica Fabio Lucchini. -- São Paulo: Pearson
+- Java: como programar / Paul Deitel, Harvey Deitel; traduÃ§Ã£o Edson
+Furmankiewicz; revisÃ£o tÃ©cnica Fabio Lucchini. -- SÃ£o Paulo: Pearson
 Education do Brasil, 2017.
