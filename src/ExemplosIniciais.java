@@ -1,78 +1,84 @@
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 class Disciplina {
 	
 	private String nome;
 	private int qtdAlunos;
+	private String categoria;
 	
-	public Disciplina(String nome, int qtdAlunos) {
+	public Disciplina(String nome, int qtdAlunos, String categoria) {
 		this.nome = nome;
 		this.qtdAlunos = qtdAlunos;
+		this.categoria = categoria;
 	}
 	
 	public String getNome() {
 		return nome;
 	}
+	
 	public int getQtdAlunos() {
 		return qtdAlunos;
+	}
+	
+	public String getCategoria() {
+		return categoria;
 	}
 	
 }
 
 public class ExemplosIniciais {
 
-/**
- * Anotações
- * 
- * -= Dica (1) =-
- * - Ficar atento com auto-boxing no uso dos métodos do Java 8.
- * Por exemplo, caso tenha certeza que sempre será um inteiro(primitivo) a ser comparado na qtdAlunos
- * poderia então, utilizar:
- * Comparator.comparingInt(Disciplina::getQtdAlunos)
- * ao invés de
- * Comparator.comparing(Disciplina::getQtdAlunos)
- * -------------------------------------------------------------------
- * 
- * 1) Operações Stream intermediárias
-
-filter : Resulta em um fluxo contendo apenas os elementos que atendem uma condição.
-distinct : Resulta em um fluxo que contém somente os elementos únicos.
-limit : Resulta em um fluxo com o número especificado de elementos a partir do início do fluxo original.
-map : Resulta em um fluxo em que cada elemento do fluxo original é mapeado para um novo valor.
-sorted : Resulta em um fluxo em que os elementos estão em ordem classificada. O novo fluxo tem o mesmo número de elementos que o fluxo original.
-
-2) Operações Stream terminais
-
-forEach : Realiza o processamento em cada elemento em um fluxo (por exemplo, exibir cada elemento).
-
-2.1) Operações de redução - recebem todos os valores no fluxo e retornam um único valor
-
-average : Calcula a média dos elementos em um fluxo numérico.
-count : Retorna o número de elemen
- * 
- */
 	public static void main(String[] args) {
 		List<Disciplina> disciplinas = new ArrayList<Disciplina>();
-		disciplinas.add(new Disciplina("Ciências", 40));
-		disciplinas.add(new Disciplina("Física", 30));
-		disciplinas.add(new Disciplina("Informática", 35));
-		disciplinas.add(new Disciplina("Geografia", 32));
-		disciplinas.add(new Disciplina("Portugês", 40));
-		disciplinas.add(new Disciplina("Matemática", 40));
+		disciplinas.add(new Disciplina("Ciências", 40, "Meio ambiente"));
+		disciplinas.add(new Disciplina("Física", 30, "Meio ambiente"));
+		disciplinas.add(new Disciplina("Informática", 35, "TI"));
+		disciplinas.add(new Disciplina("Geografia", 32, "Meio ambiente"));
+		disciplinas.add(new Disciplina("Portugês", 40, "Linguística"));
+		disciplinas.add(new Disciplina("Matemática", 40, "Exatas"));
 		
-		//ordenaPelaQtdAlunos(disciplinas);
-		//imprimeDisciplinasComQtdAlunosSuperior35(disciplinas);
-		//imprimeQtdAlunosDasDisciplinasComQtdAlunosSuperior35(disciplinas);
-		//imprimeSomaQtdAlunosDasDisciplinasComQtdAlunosSuperior35(disciplinas);
-		//aplicandoDistinct(disciplinas);
+		ordenaPelaQtdAlunos(disciplinas);
+		System.out.println("------------------------");
+		imprimeDisciplinasComQtdAlunosSuperior35(disciplinas);
+		System.out.println("------------------------");
+		imprimeQtdAlunosDasDisciplinasComQtdAlunosSuperior35(disciplinas);
+		System.out.println("------------------------");
+		imprimeSomaQtdAlunosDasDisciplinasComQtdAlunosSuperior35(disciplinas);
+		System.out.println("------------------------");
+		aplicandoDistinct(disciplinas);
+		System.out.println("------------------------");
+		criaNovaListaUtilizandoCollectors(disciplinas);
+		System.out.println("------------------------");
+		agrupaDisciplinasPorCategoria(disciplinas);
+		System.out.println("------------------------");
+	}
+
+	//Agrupa disciplinas por categoria e imprime-os
+	private static void agrupaDisciplinasPorCategoria(List<Disciplina> disciplinas) {
+		Map<String, List<Disciplina>> groupedByCategoria = 
+				disciplinas.stream()
+					.collect(Collectors.groupingBy(Disciplina::getCategoria));
 		
-		disciplinas.stream()
-		.filter(d -> d.getQtdAlunos() >= 35)
-		.map(Disciplina::getQtdAlunos)
-		.limit(1).forEach(System.out::println);;
-	
+		groupedByCategoria.forEach(
+				(categoria, disciplinasDaCategoria) -> 
+					{
+						System.out.println(categoria);
+						disciplinasDaCategoria.forEach(disciplina -> System.out.printf(" %s%n", disciplina.getNome()));
+					}
+				);
+	}
+
+	private static void criaNovaListaUtilizandoCollectors(List<Disciplina> disciplinas) {
+		List<String> nomes = disciplinas.stream()
+			.filter(d -> d.getQtdAlunos() >= 35)
+			.map(Disciplina::getNome)
+			.collect(Collectors.toList());
+		
+		nomes.forEach(System.out::println);
 	}
 
 	// Método apenas para exemplificar uso de distinct
