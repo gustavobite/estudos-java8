@@ -70,5 +70,3 @@ Referência bibliográfica:
 - Java: como programar / Paul Deitel, Harvey Deitel; tradução Edson
 Furmankiewicz; revisão técnica Fabio Lucchini. -- São Paulo: Pearson
 Education do Brasil, 2017.
-
-<script src="https://gist.github.com/gustavobite/3e1eff20ba93ec51416ea43ba263bb52.js"></script>
