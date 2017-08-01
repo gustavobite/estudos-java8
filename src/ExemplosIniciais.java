@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 class Disciplina {
@@ -55,6 +56,27 @@ public class ExemplosIniciais {
 		System.out.println("------------------------");
 		agrupaDisciplinasPorCategoria(disciplinas);
 		System.out.println("------------------------");
+		imprimeDisciplinaComQtdAlunosSuperior35UtilizandoOptional(disciplinas);
+	}
+
+	//Método para praticar o uso de Optional
+	private static void imprimeDisciplinaComQtdAlunosSuperior35UtilizandoOptional(List<Disciplina> disciplinas) {
+		
+		// Nos ajuda a trabalhar com o 'null'
+		// Com Optional conseguimos tratar os objetos sem precisar usar o X == null e etc.. Ficando assim, mais interessante.
+		Optional<Disciplina> optionalDisciplina = disciplinas.stream()
+							.filter(d -> d.getQtdAlunos() >= 35)
+							.findAny();
+		
+		// Uso do orElse
+		// Neste teste, caso o 'optionalDisciplina' esteja sem valor, é criado uma "Nova disciplina"
+		Disciplina disciplinaOrElse = optionalDisciplina.orElse(new Disciplina("Nova disciplina", 0, "Sem categoria"));
+		System.out.println("Uso do orElse: " + disciplinaOrElse.getNome());
+		
+		// Um outro método interessante é o ifPresent(consumer)
+		// Caso o optional possua valor, é executado a expressão dentro do método ifPresent
+		optionalDisciplina.ifPresent(d -> System.out.println(d.getNome()));
+		
 	}
 
 	//Agrupa disciplinas por categoria e imprime-os
